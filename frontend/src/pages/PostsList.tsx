@@ -32,6 +32,12 @@ export default function PostsList() {
     fetchPosts();
   }, []);
 
+  // Helper function to create body preview
+  const getBodyPreview = (body: string, maxLength = 200) => {
+    if (body.length <= maxLength) return body;
+    return body.substring(0, maxLength).trim() + '...';
+  };
+
   if (loading) {
     return (
       <div className="container">
@@ -61,7 +67,7 @@ export default function PostsList() {
               <h2>
                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
               </h2>
-              <p className="post-body">{post.body}</p>
+              <p className="post-body">{getBodyPreview(post.body)}</p>
               <div className="post-meta">
                 <span className="comment-count">
                   {post.comments.length} comment{post.comments.length !== 1 ? 's' : ''}

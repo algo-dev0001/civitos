@@ -27,6 +27,7 @@ export const api = {
    */
   getPosts: async (): Promise<Post[]> => {
     const response = await apiClient.get<Post[]>('/posts/');
+    console.log(response.data)
     return response.data;
   },
 

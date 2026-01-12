@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # Django Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: smart-comments-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend-static:/app/staticfiles
+    environment:
+      - DEBUG=True
+      - ALLOWED_HOSTS=backend,localhost,127.0.0.1
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    restart: unless-stopped
+    networks:
+      - smart-comments-network
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: smart-comments-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - smart-comments-network
+
+volumes:
+  backend-static:
+
+networks:
+  smart-comments-network:
+    driver: bridge

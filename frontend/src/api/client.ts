@@ -7,8 +7,12 @@
 import axios from 'axios';
 import type { Post, Comment, CreateCommentData } from '../types/api';
 
-// Base URL for the API - update this if backend runs on different port
-const API_BASE_URL = 'http://localhost:8000/api';
+// Base URL for the API
+// In production (Docker), nginx proxies /api/ to backend
+// In development, connect directly to backend
+const API_BASE_URL = import.meta.env.PROD 
+  ? '/api'  // Production: use nginx proxy
+  : 'http://127.0.0.1:8000/api';  // Development: direct connection
 
 // Create axios instance with default config
 const apiClient = axios.create({

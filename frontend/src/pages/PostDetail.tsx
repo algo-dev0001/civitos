@@ -111,7 +111,7 @@ export default function PostDetail() {
                 className={`comment ${comment.flagged ? 'flagged' : ''}`}
               >
                 {comment.flagged && (
-                  <div className="flagged-badge">⚠️ Flagged for review</div>
+                  <div className="flagged-badge">⚠️ Needs review</div>
                 )}
                 <div className="comment-author">{comment.author}</div>
                 <div className="comment-text">{comment.text}</div>

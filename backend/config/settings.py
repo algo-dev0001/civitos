@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-0%k#83sjqrk+c!h#3kw*$p1vt!$^u0sl!w34)1m6mbt-(j*)ez
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver', 'backend', '*']
 
 
 # Application definition
@@ -122,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -145,3 +147,12 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# AI Classifier Configuration
+# Set USE_AI_CLASSIFIER=True to enable OpenAI-based classification
+# Falls back to rule-based classifier if disabled or if API call fails
+USE_AI_CLASSIFIER = os.getenv('USE_AI_CLASSIFIER', 'False').lower() in ('true', '1', 'yes')
+
+# OpenAI API key for comment moderation
+# Set this in your environment: export OPENAI_API_KEY='sk-...'
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')

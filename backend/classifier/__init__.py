@@ -2,9 +2,9 @@
 Comment classification module.
 
 This module provides classification logic for user-generated comments.
-The implementation can be swapped out for ML models or external APIs.
+Supports both AI-based and rule-based classification with automatic fallback.
 """
 
-from .classifier import classify_comment
+from .classifier import classify_comment, classify_comment_ai, classify_comment_rule_based
 
-__all__ = ['classify_comment']
+__all__ = ['classify_comment', 'classify_comment_ai', 'classify_comment_rule_based']

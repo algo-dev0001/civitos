@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Django Backend
   backend:
@@ -16,6 +14,9 @@ services:
       - DEBUG=True
       - ALLOWED_HOSTS=backend,localhost,127.0.0.1
       - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+      # Optional: Enable AI-based classification
+      # - USE_AI_CLASSIFIER=${USE_AI_CLASSIFIER:-False}
+      # - OPENAI_API_KEY=${OPENAI_API_KEY}
     command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     restart: unless-stopped
     networks:

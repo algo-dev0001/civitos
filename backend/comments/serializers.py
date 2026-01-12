@@ -12,4 +12,4 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'text', 'author', 'post', 'created_at', 'flagged']
-        read_only_fields = ['id', 'created_at', 'flagged']  # flagged is set by classifier
+        read_only_fields = ['id', 'created_at', 'flagged', 'post']  # post is set by the view
